@@ -10,8 +10,15 @@ def delete_file_if_present(file_path):
 
 
 def output_pre_trained_synonyms_test_details(synonym_test_details):
-    delete_file_if_present("model-details.csv")
-    writer = csv.writer(open("model-details.csv", 'a+'), delimiter=",")
+    file_path = "outputs/model-details.csv"
+    delete_file_if_present(file_path)
+    writer = csv.writer(open(file_path, 'a+'), delimiter=",")
     csv_rows = select_details_csv_rows(synonym_test_details)
     writer.writerows(csv_rows)
 
+
+def output_model_analysis(word_vector):
+    file_path = "outputs/analysis.csv"
+    delete_file_if_present(file_path)
+    writer = csv.writer(open(file_path, 'a+'), delimiter=",")
+    writer.writerows([word_vector.select_model_analysis_row()])

@@ -1,7 +1,8 @@
-from src.outputs import output_pre_trained_synonyms_test_details
+from src.outputs import output_pre_trained_synonyms_test_details, output_model_analysis
 from src.selectors_x import select_synonyms_test_details
 from src.word_vector_model.word_vector_model import WordVectorModel
 
-wv = WordVectorModel().model
-synonym_test_details = select_synonyms_test_details(wv)
+word_vector = WordVectorModel()
+synonym_test_details = select_synonyms_test_details(word_vector)
 output_pre_trained_synonyms_test_details(synonym_test_details)
+output_model_analysis(word_vector)

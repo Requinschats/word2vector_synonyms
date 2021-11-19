@@ -57,7 +57,8 @@ def select_synonym_question_label(answer, wv_suggestion):
         return "wrong"
 
 
-def select_synonyms_test_details(wv):
+def select_synonyms_test_details(word_vector):
+    wv = word_vector.model
     synonym_test_details = []
     for row in select_synonym_dataset():
         question, answer, value_0, value_1, value_2, value_3 = row
@@ -68,4 +69,5 @@ def select_synonyms_test_details(wv):
             wv_suggestion = select_best_similarity_from_model(question, options, wv)
 
         synonym_test_details.append((row, wv_suggestion))
+        word_vector.update_statistics(answer, wv_suggestion)
     return synonym_test_details
