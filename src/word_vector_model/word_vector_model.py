@@ -3,11 +3,11 @@ import gensim.downloader as api
 
 
 class WordVectorModel:
-    MODEL_NAME = 'word2vec-google-news-300'
+    DEFAULT_MODEL_NAME = 'word2vec-google-news-300'
 
-    def __init__(self):
+    def __init__(self, model_name=DEFAULT_MODEL_NAME):
+        self.name = model_name
         self.model = self.select_initialized_model()
-        self.name = self.MODEL_NAME
         self.vocabulary_size = len(list(self.model.index_to_key))
         self.valid_answer_count = 0
         self.non_guess_answer_count = 0
@@ -19,11 +19,12 @@ class WordVectorModel:
             self.non_guess_answer_count += 1
 
     def select_initialized_model(self):
-        wv = KeyedVectors.load(self.MODEL_NAME)
-        if wv: return wv
-
-        wv = api.load(self.MODEL_NAME)
-        wv.save(self.MODEL_NAME)
+        wv = None
+        try:
+            wv = KeyedVectors.load("saved_models/" + self.name)
+        except:
+            wv = api.load(self.name)
+            wv.save(self.name)
         return wv
 
     def select_model_accuracy(self):

@@ -1,2 +1,3 @@
 !/src/word2vec-google-news-300
 !/src/word2vec-google-news-300.vectors.npy
+!/src/saved_models/
