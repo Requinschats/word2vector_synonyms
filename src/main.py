@@ -15,7 +15,8 @@ model_list = [word_vector_google_news_300, word_vector_glove_wiki_gigaword_200,
               word_vector_glove_wiki_gigaword_300, word_vector_glove_twitter_25,
               word_vector_glove_twitter_200]
 
-# for model in model_list:
-# synonym_test_details = select_synonyms_test_details(word_vector_google_news_300)
-# output_pre_trained_synonyms_test_details(synonym_test_details)
-# output_model_analysis(word_vector_google_news_300)
+for model in model_list:
+    print("Generating statistics for model " + model.name)
+    synonym_test_details = select_synonyms_test_details(model)
+    output_pre_trained_synonyms_test_details(model, synonym_test_details)
+    output_model_analysis(model)
