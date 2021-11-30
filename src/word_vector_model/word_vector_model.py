@@ -13,7 +13,7 @@ class WordVectorModel:
         self.model = self.select_initialized_model()
         self.vocabulary_size = len(list(self.model.index_to_key))
         self.valid_answer_count = 0
-        self.non_guess_answer_count = 0
+        self.non_guess_answer_count = -1
 
     def update_statistics(self, answer, wv_suggestion):
         if answer == wv_suggestion:

@@ -27,7 +27,7 @@ for model in model_list:
     accuracy_statistics[0].append(model.name)
     guesses_statistics[0].append(model.name)
     accuracy_statistics[1].append(model.select_model_accuracy())
-    guesses_statistics[1].append(80 - model.non_guess_answer_count)
+    guesses_statistics[1].append(81 - model.non_guess_answer_count)
 
 plot_accuracy_graph(accuracy_statistics)
 plot_number_of_guesses_graph(guesses_statistics)
