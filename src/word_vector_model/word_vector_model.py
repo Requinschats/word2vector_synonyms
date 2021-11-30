@@ -1,9 +1,12 @@
 from gensim.models import KeyedVectors
 import gensim.downloader as api
 
+from src.outputs import create_directory_if_not_present
+
 
 class WordVectorModel:
     DEFAULT_MODEL_NAME = 'word2vec-google-news-300'
+    SAVED_MODELS_PATH = "saved_models/"
 
     def __init__(self, model_name=DEFAULT_MODEL_NAME):
         self.name = model_name
@@ -21,10 +24,13 @@ class WordVectorModel:
     def select_initialized_model(self):
         wv = None
         try:
-            wv = KeyedVectors.load("saved_models/" + self.name)
+            print("Loading: " + self.name)
+            wv = KeyedVectors.load(self.SAVED_MODELS_PATH + self.name)
         except:
             wv = api.load(self.name)
-            wv.save(self.name)
+            print("Saving: " + self.name)
+            create_directory_if_not_present(self.SAVED_MODELS_PATH)
+            wv.save(self.SAVED_MODELS_PATH + self.name)
         return wv
 
     def select_model_accuracy(self):
